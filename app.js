@@ -19,7 +19,7 @@ const startMenu = () => {
             'View Roles',
             'View Employees',
             'Add Department',
-            'Add Roles',
+            'Add Role',
             'Add Employee'
         ]
     }).then((res) =>{
@@ -46,17 +46,35 @@ const startMenu = () => {
     })
 }
 
+const viewDepartments = () => {
+    const query = 
+    'SELECT * FROM department';
+    connection.query(query, (err, res) => {
+        if (err) throw err;
+        console.log(res);
+        startMenu();
+        });
+    };
 
+    const viewRoles = () => {
+        const query = 
+        'SELECT * FROM role';
+        connection.query(query, (err, res) => {
+            if (err) throw err;
+            console.log(res);
+            startMenu();
+            });
+        };
 
-// * Add departments, roles, employees
-
-// * View departments, roles, employees
-
-
-
-
-
-
+        const viewEmployees = () => {
+            const query = 
+            'SELECT * FROM employee';
+            connection.query(query, (err, res) => {
+                if (err) throw err;
+                console.log(res);
+                startMenu();
+                });
+            };
 
 
 
