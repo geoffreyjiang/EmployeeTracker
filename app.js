@@ -81,9 +81,9 @@ const addDepartment = () => {
         message: "Enter Department Name",
     }).then((res) => {
         connection.query("INSERT INTO department SET ?",{name: res.addDept},
-        (err, data) => {
+        (err, res) => {
             if (err) throw err
-            console.table(data)
+            console.table(res)
             startMenu()
         })
     })
