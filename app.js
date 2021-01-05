@@ -47,8 +47,7 @@ const startMenu = () => {
 }
 
 const viewDepartments = () => {
-    const query = 
-    'SELECT * FROM department';
+    const query = 'SELECT * FROM department';
     connection.query(query, (err, res) => {
         if (err) throw err;
         console.log(res);
@@ -57,8 +56,7 @@ const viewDepartments = () => {
     };
 
     const viewRoles = () => {
-        const query = 
-        'SELECT * FROM role';
+        const query = 'SELECT * FROM role';
         connection.query(query, (err, res) => {
             if (err) throw err;
             console.log(res);
@@ -67,14 +65,31 @@ const viewDepartments = () => {
         };
 
         const viewEmployees = () => {
-            const query = 
-            'SELECT * FROM employee';
+            const query = 'SELECT * FROM employee';
             connection.query(query, (err, res) => {
                 if (err) throw err;
                 console.log(res);
                 startMenu();
                 });
             };
+
+
+const addDepartment = () => {
+    inquirer.prompt({
+        name: "addDept",
+        type: "input",
+        message: "Enter Department Name",
+    }).then((res) => {
+        connection.query("INSERT INTO department SET ?",{name: res.addDept},
+        (err, data) => {
+            if (err) throw err
+            console.table(data)
+            startMenu()
+        })
+    })
+}
+
+
 
 
 
