@@ -46,30 +46,32 @@ const startMenu = () => {
     })
 }
 
-const viewDepartments = () => {
-    const query = 'SELECT * FROM department';
-    connection.query(query, (err, res) => {
+function viewDepartments() {
+    const query = "SELECT * FROM department";
+    connection.query(query, function (err, res) {
         if (err) throw err;
+        console.table(res);
+        startMenu();
+    });
+}
+
+function viewRoles() {
+    const query = "SELECT * FROM role";
+    connection.query(query, function (err, res) {
+        if (err) throw err;
+        console.table(res);
         startMenu();
         });
-    };
+}
 
-const viewRoles = () => {
-    const query = 'SELECT * FROM role';
-    connection.query(query, (err, res) => {
+function viewEmployees() {
+    const query = "SELECT * FROM employee";
+    connection.query(query, function (err, res) {
         if (err) throw err;
+        console.table(res);
         startMenu();
-        });
-    };
-
-const viewEmployees = () => {
-    const query = 'SELECT * FROM employee';
-        connection.query(query, (err, res) => {
-        if (err) throw err;
-        startMenu();
-        });
-    };
-
+    });
+}
 
 const addDepartment = () => {
     inquirer.prompt({
@@ -137,7 +139,6 @@ const addEmployee = () => {
         })
     })
 }
-
 
 connection.connect((err) =>{
     if(err) throw err;
