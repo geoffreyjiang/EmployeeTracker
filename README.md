@@ -18,7 +18,9 @@
   ## Usage:
     Open terminal, type "node app.js", follow prompts
   ## Tests
-    Coming Soon
+   
+  <img src="assets/gifs/employeetracker.gif">
+
   ## Contributors
     Geoffrey Jiang 
     Victor Tran  
