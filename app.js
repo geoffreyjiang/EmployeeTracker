@@ -9,13 +9,13 @@ const connection = mysql.createConnection({
     database: "employeeDB",
 });
 
-const startMenu = () => {
+const mainMenu = () => {
     inquirer.prompt({
-        name: "mainMenu",
+        name: "menu",
         type: "list",
         message: "What Would You Like To Do?",
         choices: [
-            'View Deparments',
+            'View Departments',
             'View Roles',
             'View Employees',
             'Add Department',
@@ -23,7 +23,7 @@ const startMenu = () => {
             'Add Employee'
         ]
     }).then((res) =>{
-        switch (res.mainMenu){
+        switch (res.menu){
             case 'View Departments':
                 viewDepartments()
                 break;
@@ -51,7 +51,7 @@ function viewDepartments() {
     connection.query(query, function (err, res) {
         if (err) throw err;
         console.table(res);
-        startMenu();
+        mainMenu();
     });
 }
 
@@ -60,7 +60,7 @@ function viewRoles() {
     connection.query(query, function (err, res) {
         if (err) throw err;
         console.table(res);
-        startMenu();
+        mainMenu();
         });
 }
 
@@ -69,7 +69,7 @@ function viewEmployees() {
     connection.query(query, function (err, res) {
         if (err) throw err;
         console.table(res);
-        startMenu();
+        mainMenu();
     });
 }
 
@@ -83,7 +83,7 @@ const addDepartment = () => {
             (err, res) => {
             if (err) throw err
             console.table(res)
-            startMenu()
+            mainMenu();
         })
     })
 }
@@ -109,7 +109,7 @@ const addRole = () => {
         const query = `INSERT INTO role (title, salary, department_id) VALUES ('${res.newRole}', '${res.roleSal}', '${res.deptId}')`;
         connection.query(query, function (err,res){
             if (err) throw err;
-            startMenu();
+            mainMenu();
         })
     })
 }
@@ -135,12 +135,12 @@ const addEmployee = () => {
         const query = `INSERT INTO employee (first_name, last_name, role_id) VALUES ('${res.first}', '${res.last}', '${res.roleId}')`
         connection.query(query, function(err, res){
             if (err) throw err;
-            startMenu()
+            mainMenu();
         })
     })
 }
 
 connection.connect((err) =>{
     if(err) throw err;
-    startMenu()
+    mainMenu();
 });
