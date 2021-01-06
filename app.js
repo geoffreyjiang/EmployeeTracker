@@ -107,7 +107,7 @@ const addRole = () => {
         const query = `INSERT INTO role (title, salary, department_id) VALUES ('${res.newRole}', '${res.roleSal}', '${res.deptId}')`;
         connection.query(query, function (err,res){
             if (err) throw err;
-            mainMenu();
+            startMenu();
         })
     })
 }
@@ -133,12 +133,10 @@ const addEmployee = () => {
         const query = `INSERT INTO employee (first_name, last_name, role_id) VALUES ('${res.fName}', '${res.lName}', '${res.roleId}')`
         connection.query(query, function(err, res){
             if (err) throw err;
-            mainMenu()
+            startMenu()
         })
     })
 }
-
-
 
 
 connection.connect((err) =>{
