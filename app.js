@@ -2,9 +2,9 @@ const mysql = require('mysql');
 const inquirer = require('inquirer');
 
 const connection = mysql.createConnection({
-    host = "localhost",
-    port = 3306,
-    user = "root",
+    host: "localhost",
+    port: 3306,
+    user: "root",
     password: "password",
     database: "employeeDB",
 });
@@ -50,28 +50,25 @@ const viewDepartments = () => {
     const query = 'SELECT * FROM department';
     connection.query(query, (err, res) => {
         if (err) throw err;
-        console.log(res);
         startMenu();
         });
     };
 
-    const viewRoles = () => {
-        const query = 'SELECT * FROM role';
-        connection.query(query, (err, res) => {
-            if (err) throw err;
-            console.log(res);
-            startMenu();
-            });
-        };
+const viewRoles = () => {
+    const query = 'SELECT * FROM role';
+    connection.query(query, (err, res) => {
+        if (err) throw err;
+        startMenu();
+        });
+    };
 
-        const viewEmployees = () => {
-            const query = 'SELECT * FROM employee';
-            connection.query(query, (err, res) => {
-                if (err) throw err;
-                console.log(res);
-                startMenu();
-                });
-            };
+const viewEmployees = () => {
+    const query = 'SELECT * FROM employee';
+        connection.query(query, (err, res) => {
+        if (err) throw err;
+        startMenu();
+        });
+    };
 
 
 const addDepartment = () => {
@@ -81,7 +78,7 @@ const addDepartment = () => {
         message: "Enter Department Name",
     }).then((res) => {
         connection.query("INSERT INTO department SET ?",{name: res.addDept},
-        (err, res) => {
+            (err, res) => {
             if (err) throw err
             console.table(res)
             startMenu()
@@ -89,6 +86,25 @@ const addDepartment = () => {
     })
 }
 
+const addRole = () => {
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "newRole",
+            message: "Enter Role"
+        },
+        {
+            type: "input",
+            name: "roleSal",
+            message: "Enter Salary"
+        },
+        {
+            type: "input",
+            name: "deptId",
+            message: "Enter Department ID"
+        }
+    ])
+}
 
 
 
