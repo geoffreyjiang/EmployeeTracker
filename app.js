@@ -112,6 +112,32 @@ const addRole = () => {
     })
 }
 
+const addEmployee = () => {
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "fName",
+            message: "Enter First Name"
+        },
+        {
+            type: "input",
+            name: "lName",
+            message: "Enter Last Name"
+        },
+        {
+            type: "input",
+            name: "roleId",
+            message: "Enter Role ID"
+        }
+    ]).then((res) => {
+        const query = `INSERT INTO employee (first_name, last_name, role_id) VALUES ('${res.fName}', '${res.lName}', '${res.roleId}')`
+        connection.query(query, function(err, res){
+            if (err) throw err;
+            mainMenu()
+        })
+    })
+}
+
 
 
 
