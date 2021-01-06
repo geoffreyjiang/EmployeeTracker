@@ -79,14 +79,15 @@ const addDepartment = () => {
         type: "input",
         message: "Enter Department Name",
     }).then((res) => {
-        connection.query("INSERT INTO department SET ?",{name: res.addDept},
-            (err, res) => {
-            if (err) throw err
+        const query = `INSERT INTO department (name) VALUES ('${res.addDept}')`;
+        connection.query(query, function (err, res) {
+            if (err) throw err;
             console.table(res)
             mainMenu();
         })
-    })
-}
+        })
+    }
+
 
 const addRole = () => {
     inquirer.prompt([
@@ -109,6 +110,7 @@ const addRole = () => {
         const query = `INSERT INTO role (title, salary, department_id) VALUES ('${res.newRole}', '${res.roleSal}', '${res.deptId}')`;
         connection.query(query, function (err,res){
             if (err) throw err;
+            console.table(res);
             mainMenu();
         })
     })
@@ -135,6 +137,7 @@ const addEmployee = () => {
         const query = `INSERT INTO employee (first_name, last_name, role_id) VALUES ('${res.first}', '${res.last}', '${res.roleId}')`
         connection.query(query, function(err, res){
             if (err) throw err;
+            console.table(res);
             mainMenu();
         })
     })
