@@ -103,7 +103,13 @@ const addRole = () => {
             name: "deptId",
             message: "Enter Department ID"
         }
-    ])
+    ]) .then((res) => {
+        const query = `INSERT INTO role (title, salary, department_id) VALUES ('${res.newRole}', '${res.roleSal}', '${res.deptId}')`;
+        connection.query(query, function (err,res){
+            if (err) throw err;
+            mainMenu();
+        })
+    })
 }
 
 
